@@ -3,6 +3,8 @@ package com.example.customviews
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +43,12 @@ class BottomButtonsView(
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
             : this(context, attrs, defStyleAttr, R.style.myBottomButtonsStyle)
 
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.attr.bottomButtonsStyle)
+    constructor(context: Context, attrs: AttributeSet?) : this(
+        context,
+        attrs,
+        R.attr.bottomButtonsStyle
+    )
+
     constructor(context: Context) : this(context, null)
 
     init {
@@ -50,6 +57,19 @@ class BottomButtonsView(
         binding = ButtonsBinding.bind(this)
         initializeAttributes(attrs, defStyleAttr, defStyleRes)
         initializeListeners()
+    }
+
+    override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState()!!
+        val savedState = SavedState(superState)
+        savedState.positiveButtonText = binding.positiveButton.text.toString()
+        return savedState
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        val savedState = state as SavedState
+        super.onRestoreInstanceState(savedState.superState)
+        binding.positiveButton.text = savedState.positiveButtonText
     }
 
     private fun initializeAttributes(attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) {
@@ -67,15 +87,15 @@ class BottomButtonsView(
             setPositiveButtonText(positiveButtonText)
 
             val positiveButtonColor = typedArray.getColor(
-                    R.styleable.BottomButtonsView_bottomPositiveButtonBackgroundColor,
-                    Color.GREEN
-                )
+                R.styleable.BottomButtonsView_bottomPositiveButtonBackgroundColor,
+                Color.GREEN
+            )
             positiveButton.backgroundTintList = ColorStateList.valueOf(positiveButtonColor)
 
-/*            val positiveButtonRippleColor = typedArray.getColor(
-                R.styleable.BottomButtonsView_bottomPositiveButtonRippleColor,
-                Color.RED
-            )*/
+            /*            val positiveButtonRippleColor = typedArray.getColor(
+                            R.styleable.BottomButtonsView_bottomPositiveButtonRippleColor,
+                            Color.RED
+                        )*/
 
             val negativeButtonText =
                 typedArray.getString(R.styleable.BottomButtonsView_bottomNegativeButtonText)
@@ -94,7 +114,7 @@ class BottomButtonsView(
 
         typedArray.recycle()
     }
-    
+
     private fun initializeListeners() {
         binding.positiveButton.setOnClickListener {
             this.listener?.invoke(BottomButtonsAction.POSITIVE)
@@ -115,5 +135,32 @@ class BottomButtonsView(
 
     fun setNegativeButtonText(text: String?) {
         binding.negativeButton.text = text ?: "No"
+    }
+
+    class SavedState : BaseSavedState {
+
+        var positiveButtonText: String? = null
+
+        constructor(superState: Parcelable) : super(superState)
+        constructor(parcel: Parcel) : super(parcel) {
+            positiveButtonText = parcel.readString()
+        }
+
+        override fun writeToParcel(out: Parcel, flags: Int) {
+            super.writeToParcel(out, flags)
+            out.writeString(positiveButtonText)
+        }
+
+        companion object {
+            @JvmField
+            val CREATOR: Parcelable.Creator<SavedState> =
+                object : Parcelable.Creator<SavedState> {
+                    override fun createFromParcel(source: Parcel) = SavedState(source)
+
+                    override fun newArray(size: Int) : Array<SavedState?> {
+                        return Array(size) { null }
+                    }
+                }
+        }
     }
 }
