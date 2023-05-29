@@ -34,4 +34,8 @@
         <item name="bottomNegativeButtonBackgroundColor">#D32F2F</item>
     </style>
 
+    <style name="myBottomButtonsStyle">
+        <item name="bottomPositiveButtonBackgroundColor">#033C1B</item>
+        <item name="bottomNegativeButtonBackgroundColor">#5A0D0D</item>
+    </style>
 </resources>

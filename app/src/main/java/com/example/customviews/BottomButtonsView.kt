@@ -17,7 +17,7 @@ class BottomButtonsView(
     private val binding: ButtonsBinding
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
-            : this(context, attrs, defStyleAttr, 0)
+            : this(context, attrs, defStyleAttr, R.style.myBottomButtonsStyle)
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.attr.bottomButtonsStyle)
     constructor(context: Context) : this(context, null)
