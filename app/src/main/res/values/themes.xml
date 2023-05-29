@@ -13,6 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="materialButtonStyle">@style/myButtonStyle</item>
+        <item name="bottomButtonsStyle">@style/defaultButtonStyle</item>
     </style>
 
     <style name="myButtonStyle" parent="Widget.MaterialComponents.Button">
@@ -26,6 +27,11 @@
 
         <item name="bottomNegativeButtonBackgroundColor">@color/red_200</item>
         <item name="bottomNegativeButtonRippleColor">@color/red_highlight</item>
+    </style>
+
+    <style name="defaultButtonStyle">
+        <item name="bottomPositiveButtonBackgroundColor">#00796B</item>
+        <item name="bottomNegativeButtonBackgroundColor">#D32F2F</item>
     </style>
 
 </resources>
