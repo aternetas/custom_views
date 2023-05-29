@@ -21,7 +21,7 @@
         <item name="textAllCaps">false</item>
     </style>
     
-    <style name="myButtons">
+    <style name="myButtonsStyle">
         <item name="bottomPositiveButtonBackgroundColor">@color/green_200</item>
         <item name="bottomPositiveButtonRippleColor">@color/purple_700</item>
 

@@ -8,6 +8,12 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.customviews.databinding.ButtonsBinding
 
+enum class BottomButtonsAction {
+    POSITIVE, NEGATIVE
+}
+
+typealias OnBottomButtonsActionListener = (BottomButtonsAction) -> Unit
+
 class BottomButtonsView(
     context: Context,
     attrs: AttributeSet?,
@@ -15,6 +21,22 @@ class BottomButtonsView(
     defStyleRes: Int
 ) : ConstraintLayout(context, attrs, defStyleAttr, defStyleRes) {
     private val binding: ButtonsBinding
+    private var listener: OnBottomButtonsActionListener? = null
+    var isProgressMode: Boolean = false
+        set(value) {
+            field = value
+            with(binding) {
+                if (value) {
+                    positiveButton.visibility = GONE
+                    negativeButton.visibility = GONE
+                    progress.visibility = VISIBLE
+                } else {
+                    positiveButton.visibility = VISIBLE
+                    negativeButton.visibility = VISIBLE
+                    progress.visibility = GONE
+                }
+            }
+        }
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
             : this(context, attrs, defStyleAttr, R.style.myBottomButtonsStyle)
@@ -27,6 +49,7 @@ class BottomButtonsView(
         inflater.inflate(R.layout.buttons, this, true)
         binding = ButtonsBinding.bind(this)
         initializeAttributes(attrs, defStyleAttr, defStyleRes)
+        initializeListeners()
     }
 
     private fun initializeAttributes(attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) {
@@ -41,7 +64,7 @@ class BottomButtonsView(
         with(binding) {
             val positiveButtonText =
                 typedArray.getString(R.styleable.BottomButtonsView_bottomPositiveButtonText)
-            positiveButton.text = positiveButtonText ?: "Ok"
+            setPositiveButtonText(positiveButtonText)
 
             val positiveButtonColor = typedArray.getColor(
                     R.styleable.BottomButtonsView_bottomPositiveButtonBackgroundColor,
@@ -56,7 +79,7 @@ class BottomButtonsView(
 
             val negativeButtonText =
                 typedArray.getString(R.styleable.BottomButtonsView_bottomNegativeButtonText)
-            negativeButton.text = negativeButtonText ?: "No"
+            setNegativeButtonText(negativeButtonText)
 
             val negativeButtonColor =
                 typedArray.getColor(
@@ -65,19 +88,32 @@ class BottomButtonsView(
                 )
             negativeButton.backgroundTintList = ColorStateList.valueOf(negativeButtonColor)
 
-            val isProgressMode =
+            isProgressMode =
                 typedArray.getBoolean(R.styleable.BottomButtonsView_bottomProgressMode, false)
-            if (isProgressMode) {
-                positiveButton.visibility = GONE
-                negativeButton.visibility = GONE
-                progress.visibility = VISIBLE
-            } else {
-                positiveButton.visibility = VISIBLE
-                negativeButton.visibility = VISIBLE
-                progress.visibility = GONE
-            }
         }
 
         typedArray.recycle()
+    }
+    
+    private fun initializeListeners() {
+        binding.positiveButton.setOnClickListener {
+            this.listener?.invoke(BottomButtonsAction.POSITIVE)
+        }
+
+        binding.negativeButton.setOnClickListener {
+            this.listener?.invoke(BottomButtonsAction.NEGATIVE)
+        }
+    }
+
+    fun setListener(listener: OnBottomButtonsActionListener?) {
+        this.listener = listener
+    }
+
+    fun setPositiveButtonText(text: String?) {
+        binding.positiveButton.text = text ?: "Ok"
+    }
+
+    fun setNegativeButtonText(text: String?) {
+        binding.negativeButton.text = text ?: "No"
     }
 }

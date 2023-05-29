@@ -7,7 +7,8 @@
     tools:context=".MainActivity">
 
     <com.example.customviews.BottomButtonsView
-        style="@style/myButtons"
+        android:id="@+id/bottomButtons"
+        style="@style/myButtonsStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:bottomNegativeButtonText="@string/cancel"
