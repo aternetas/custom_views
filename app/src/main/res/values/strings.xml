@@ -2,4 +2,6 @@
     <string name="app_name">CustomViews</string>
     <string name="cancel">Cancel</string>
     <string name="accept">Accept</string>
+    <string name="to_buttons_activity">To Buttons Activity</string>
+    <string name="to_tic_tac_toe_field">To Tic-tac-toe field</string>
 </resources>
