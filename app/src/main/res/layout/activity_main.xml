@@ -6,11 +6,14 @@
     android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
-    <include
+    <com.example.customviews.BottomButtonsView
         android:id="@+id/bottomButtons"
-        layout="@layout/buttons"
+        style="@style/myButtonsStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:bottomNegativeButtonText="@string/cancel"
+        app:bottomPositiveButtonText="@string/accept"
+        app:bottomProgressMode="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

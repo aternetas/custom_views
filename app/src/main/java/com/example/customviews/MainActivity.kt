@@ -1,33 +1,47 @@
 package com.example.customviews
 
 import android.os.Bundle
-import android.view.View
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.example.customviews.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    private val token = Any()
+    private val handler = Handler(Looper.getMainLooper())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
 
-        setupUi()
-
-        with(binding.bottomButtons) {
-            positiveButton.setOnClickListener {
-                negativeButton.visibility = View.GONE
-                positiveButton.visibility = View.GONE
-                progress.visibility = View.VISIBLE
-            }
-        }
+        setupActionListeners()
     }
 
-    private fun setupUi() = with(binding.bottomButtons) {
-        progress.visibility = View.GONE
-        negativeButton.setBackgroundColor(
-            ContextCompat.getColor(applicationContext, R.color.red_200)
-        )
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(token)
+    }
+
+    private fun setupActionListeners() {
+        binding.bottomButtons.setListener {
+            when (it) {
+                BottomButtonsAction.POSITIVE -> {
+                    binding.bottomButtons.isProgressMode = true
+                    handler.postDelayed({
+                        binding.bottomButtons.isProgressMode = false
+                        binding.bottomButtons.setPositiveButtonText("New Ok")
+                        Toast.makeText(this, "positive", Toast.LENGTH_SHORT).show()
+                    }, token, 2000)
+                }
+
+                BottomButtonsAction.NEGATIVE -> {
+                    binding.bottomButtons.setNegativeButtonText("New No")
+                    Toast.makeText(this, "negative", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }
