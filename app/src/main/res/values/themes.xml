@@ -17,11 +17,12 @@
         <item name="ticTacToeFieldStyle">@style/globalTicTacToeFieldStyle</item>
     </style>
 
+    <!--themes for Buttons-->
     <style name="myButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/white</item>
         <item name="textAllCaps">false</item>
     </style>
-    
+
     <style name="myButtonsStyle">
         <item name="bottomPositiveButtonBackgroundColor">@color/green_200</item>
         <item name="bottomPositiveButtonRippleColor">@color/purple_700</item>
@@ -40,12 +41,13 @@
         <item name="bottomNegativeButtonBackgroundColor">#5A0D0D</item>
     </style>
 
+    <!--themes for TickTacToe-->
     <style name="defaultTicTacToeFieldStyle">
         <item name="playerOneColor">@color/red_700</item>
         <item name="playerTwoColor">@color/blue_700</item>
         <item name="gridColor">@color/black</item>
     </style>
-    
+
     <style name="globalTicTacToeFieldStyle" parent="defaultTicTacToeFieldStyle">
         <item name="playerOneColor">@color/pink</item>
         <item name="playerTwoColor">@color/gray</item>

@@ -25,7 +25,7 @@
             android:name=".buttons.ButtonsActivity"
             android:exported="false" />
         <activity
-            android:name=".tictactoe.TicTacToeField"
+            android:name=".tictactoe.TicTacToeActivity"
             android:exported="false" />
 
     </application>

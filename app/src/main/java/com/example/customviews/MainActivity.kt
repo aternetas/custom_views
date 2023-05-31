@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.customviews.buttons.ButtonsActivity
 import com.example.customviews.databinding.ActivityMainBinding
-import com.example.customviews.tictactoe.TicTacToeField
+import com.example.customviews.tictactoe.TicTacToeActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,9 +20,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.toTicTacToeButton.setOnClickListener {
-            val intent = Intent(this, TicTacToeField::class.java)
-//            intent.putExtra("rows", 5)
-//            intent.putExtra("columns", 5)
+            val intent = Intent(this, TicTacToeActivity::class.java)
             startActivity(intent)
         }
     }

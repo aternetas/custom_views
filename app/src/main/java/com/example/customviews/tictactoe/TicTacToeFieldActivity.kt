@@ -1,7 +1,5 @@
 package com.example.customviews.tictactoe
 
-import androidx.appcompat.app.AppCompatActivity
-
 enum class Cell {
     X, O, EMPTY
 }
@@ -11,7 +9,7 @@ typealias OnFieldChangedListener = (field: TicTacToeField) -> Unit
 class TicTacToeField(
     val rows: Int = 5,
     val columns: Int = 5
-) : AppCompatActivity() {
+) {
     private val cells = Array(rows) { Array(columns) { Cell.EMPTY } }
     val listeners = mutableSetOf<OnFieldChangedListener>()
 
