@@ -2,6 +2,7 @@ package com.example.customviews.tictactoe
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -19,12 +20,17 @@ class TicTacToeView(
             field?.listeners?.remove(listener)
             field = value
             field?.listeners?.add(listener)
+            updateViewSize()
             requestLayout()
             invalidate()
         }
     private var playerOneColor by Delegates.notNull<Int>()
     private var playerTwoColor by Delegates.notNull<Int>()
     private var gridColor by Delegates.notNull<Int>()
+
+    private val fieldRect = RectF(0f, 0f, 0f, 0f)
+    private var cellSize: Float = 0f
+    private var cellPadding: Float = 0f
 
     private var listener: OnFieldChangedListener = {
 
@@ -89,7 +95,7 @@ class TicTacToeView(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        TODO("Not yet implemented")
+        updateViewSize()
     }
 
     private fun initializeAttributes(attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) {
@@ -106,8 +112,32 @@ class TicTacToeView(
     }
 
     private fun initializeDefaultTheme() {
-        playerOneColor = PLAYER_O_COLOR
-        playerTwoColor = PLAYER_X_COLOR
+        playerOneColor = PLAYER_X_COLOR
+        playerTwoColor = PLAYER_O_COLOR
         gridColor = GRID_COLOR
+    }
+    
+    private fun updateViewSize() {
+        val field = this.field ?: return
+
+        val safeWidth = width - paddingStart - paddingEnd
+        val safeHeight = height - paddingTop - paddingBottom
+
+        val cellWidth = safeWidth / field.columns.toFloat()
+        val cellHeight = safeHeight / field.rows.toFloat()
+
+        val paddingValue = 0.2f
+        cellSize = cellWidth.coerceAtMost(cellHeight)
+        cellPadding = cellSize * paddingValue
+
+        val fieldWidth = cellSize * field.columns
+        val fieldHeight = cellSize * field.rows
+
+        fieldRect.set(
+            paddingStart + (safeWidth - fieldWidth) / 2,
+            paddingTop + (safeHeight - fieldHeight) / 2,
+            fieldRect.left + fieldWidth,
+            fieldRect.top + fieldHeight
+        )
     }
 }
