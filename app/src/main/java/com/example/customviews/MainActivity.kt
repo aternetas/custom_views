@@ -1,5 +1,6 @@
 package com.example.customviews
 
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -30,11 +31,13 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 BottomButtonsAction.POSITIVE -> {
                     binding.bottomButtons.isProgressMode = true
-                    handler.postDelayed({
-                        binding.bottomButtons.isProgressMode = false
-                        binding.bottomButtons.setPositiveButtonText("New Ok")
-                        Toast.makeText(this, "positive", Toast.LENGTH_SHORT).show()
-                    }, token, 2000)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        handler.postDelayed({
+                            binding.bottomButtons.isProgressMode = false
+                            binding.bottomButtons.setPositiveButtonText("New Ok")
+                            Toast.makeText(this, "positive", Toast.LENGTH_SHORT).show()
+                        }, token, 2000)
+                    }
                 }
 
                 BottomButtonsAction.NEGATIVE -> {
