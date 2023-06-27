@@ -3,19 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.example.customviews.BottomButtonsView
-        android:id="@+id/bottomButtons"
-        style="@style/myButtonsStyle"
-        android:layout_width="0dp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/toBottomButtonsButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:bottomNegativeButtonText="@string/cancel"
-        app:bottomPositiveButtonText="@string/accept"
-        app:bottomProgressMode="false"
+        android:text="@string/to_bottombuttons"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/toTicTacToeButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/to_tictactoe"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@id/toBottomButtonsButton"
+        app:layout_constraintStart_toStartOf="@id/toBottomButtonsButton"
+        app:layout_constraintTop_toBottomOf="@id/toBottomButtonsButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

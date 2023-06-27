@@ -1,4 +1,4 @@
-package com.example.customviews
+package com.example.customviews.bottombuttons
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -8,6 +8,7 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.customviews.R
 import com.example.customviews.databinding.ButtonsBinding
 
 enum class BottomButtonsAction {
