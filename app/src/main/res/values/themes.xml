@@ -14,6 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="materialButtonStyle">@style/myButtonStyle</item>
         <item name="bottomButtonsStyle">@style/defaultButtonStyle</item>
+        <item name="ticTacToeStyle">@style/defaultTicTacToeFieldStyle</item>
     </style>
 
     <style name="myButtonStyle" parent="Widget.MaterialComponents.Button">
@@ -37,5 +38,13 @@
     <style name="myBottomButtonsStyle">
         <item name="bottomPositiveButtonBackgroundColor">#033C1B</item>
         <item name="bottomNegativeButtonBackgroundColor">#5A0D0D</item>
+    </style>
+
+    <style name="defaultTicTacToeFieldStyle">
+        <!--to do-->
+    </style>
+
+    <style name="myTicTacToeStyle">
+        <!--to do-->
     </style>
 </resources>
