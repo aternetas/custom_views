@@ -2,6 +2,7 @@ package com.example.customviews.tictactoe
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
 import com.example.customviews.R
 
@@ -18,4 +19,8 @@ class TicTacToeView(
             : this(context, attrs, R.attr.ticTacToeStyle)
 
     constructor(context: Context) : this(context, null)
+
+    init {
+        val inflater = LayoutInflater.from(context)
+    }
 }

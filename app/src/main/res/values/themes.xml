@@ -41,10 +41,14 @@
     </style>
 
     <style name="defaultTicTacToeFieldStyle">
-        <!--to do-->
+        <item name="borderColor">#C4D0E8</item>
+        <item name="xColor">#86324A</item>
+        <item name="oColor">#141414</item>
     </style>
 
     <style name="myTicTacToeStyle">
-        <!--to do-->
+        <item name="borderColor">#707070</item>
+        <item name="xColor">#491322</item>
+        <item name="oColor">#085C52</item>
     </style>
 </resources>

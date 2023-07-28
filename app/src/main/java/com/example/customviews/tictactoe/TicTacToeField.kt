@@ -1,7 +1,7 @@
 package com.example.customviews.tictactoe
 
 enum class CELL_STATE {
-    EMPTY, X, Y
+    EMPTY, X, O
 }
 //or field: TicTacToeField
 typealias onCellStateChangedListener = (row: Int, column: Int) -> Unit
